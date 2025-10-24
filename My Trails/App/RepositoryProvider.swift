@@ -14,13 +14,21 @@ struct RepositoryProvider {
     let poiRepository: any POIRepository
 
     init(
-        trailRepository: any TrailRepository = LocalTrailRepository(),
-        offlineRepository: any OfflinePackageRepository = FileSystemOfflineRepository(),
-        poiRepository: any POIRepository = OpenOverpassPOIRepository()
+        trailRepository: any TrailRepository,
+        offlineRepository: any OfflinePackageRepository,
+        poiRepository: any POIRepository
     ) {
         self.trailRepository = trailRepository
         self.offlineRepository = offlineRepository
         self.poiRepository = poiRepository
+    }
+
+    static func makeDefault() -> RepositoryProvider {
+        RepositoryProvider(
+            trailRepository: LocalTrailRepository(),
+            offlineRepository: FileSystemOfflineRepository(),
+            poiRepository: OpenOverpassPOIRepository()
+        )
     }
 
     func bootstrap() async throws {

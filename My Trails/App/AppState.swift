@@ -21,13 +21,23 @@ final class AppState: ObservableObject {
     let analytics: AnalyticsService
 
     init(
-        repositories: RepositoryProvider = RepositoryProvider(),
-        services: ServiceProvider = ServiceProvider(),
+        repositories: RepositoryProvider,
+        services: ServiceProvider,
         analytics: AnalyticsService = ConsoleAnalyticsService()
     ) {
         self.repositories = repositories
         self.services = services
         self.analytics = analytics
+    }
+
+    convenience init(
+        analytics: AnalyticsService = ConsoleAnalyticsService()
+    ) {
+        self.init(
+            repositories: RepositoryProvider.makeDefault(),
+            services: ServiceProvider.makeDefault(),
+            analytics: analytics
+        )
     }
 
     func bootstrap() async {
