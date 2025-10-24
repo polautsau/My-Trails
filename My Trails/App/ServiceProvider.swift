@@ -16,17 +16,27 @@ struct ServiceProvider {
     let navigationService: any NavigationService
 
     init(
-        authService: any AuthenticationService = EmailFirstAuthenticationService(),
-        syncService: any SyncService = FirebaseSyncService(),
-        weatherService: any WeatherService = OpenWeatherService(),
-        trackingService: any TrackingService = GPXTrackingService(),
-        navigationService: any NavigationService = GraphHopperNavigationService()
+        authService: any AuthenticationService,
+        syncService: any SyncService,
+        weatherService: any WeatherService,
+        trackingService: any TrackingService,
+        navigationService: any NavigationService
     ) {
         self.authService = authService
         self.syncService = syncService
         self.weatherService = weatherService
         self.trackingService = trackingService
         self.navigationService = navigationService
+    }
+
+    @MainActor static func makeDefault() -> ServiceProvider {
+        ServiceProvider(
+            authService: EmailFirstAuthenticationService(),
+            syncService: FirebaseSyncService(),
+            weatherService: OpenWeatherService(),
+            trackingService: GPXTrackingService(),
+            navigationService: GraphHopperNavigationService()
+        )
     }
 
     func bootstrap(repositories: RepositoryProvider) async throws {
