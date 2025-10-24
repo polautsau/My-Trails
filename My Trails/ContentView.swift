@@ -2,20 +2,16 @@
 //  ContentView.swift
 //  My Trails
 //
-//  Created by Aliaksandr Polautsau on 24/10/25.
+//  Legacy preview bridging into RootScene for SwiftUI previews.
 //
 
 import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+        RootScene()
+            .environmentObject(AppState())
+            .environmentObject(LiquidGlassTheme())
     }
 }
 
