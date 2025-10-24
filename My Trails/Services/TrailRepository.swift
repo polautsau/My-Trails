@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 protocol TrailRepository {
     func prepare() async throws

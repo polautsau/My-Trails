@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 enum DeepLinkResolver {
     static func resolve(url: URL) -> DeepLinkDestination? {

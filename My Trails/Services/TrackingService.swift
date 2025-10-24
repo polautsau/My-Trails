@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 protocol TrackingService: AnyObject {
     var currentRecording: TrailRecording? { get }

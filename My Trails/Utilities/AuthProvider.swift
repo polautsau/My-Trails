@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 enum AuthProvider: String, Codable, CaseIterable, Hashable {
     case email
