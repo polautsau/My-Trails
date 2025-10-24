@@ -19,7 +19,7 @@ import CoreLocation
     }
 
     func startRecording(trailID: UUID?) async throws -> TrailRecording {
-        var newRecording = TrailRecording(trailID: trailID, state: .recording)
+        let newRecording = TrailRecording(trailID: trailID, state: .recording)
         recording = newRecording
         Task { [weak self] in
             guard let self else { return }
@@ -54,10 +54,14 @@ import CoreLocation
     }
 
     func subscribeToSamples() -> AsyncStream<LocationSample> {
-        AsyncStream { continuation in
-            streamContinuation = continuation
+        AsyncStream { [weak self] continuation in
+            Task { @MainActor in
+                self?.streamContinuation = continuation
+            }
             continuation.onTermination = { [weak self] _ in
-                self?.streamContinuation = nil
+                Task { @MainActor in
+                    self?.streamContinuation = nil
+                }
             }
         }
     }

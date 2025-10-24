@@ -66,3 +66,7 @@ import CoreLocation
         return try decoder.decode([Trail].self, from: data)
     }
 }
+
+enum RepositoryError: Error {
+    case notFound
+}
