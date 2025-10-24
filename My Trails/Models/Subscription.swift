@@ -22,7 +22,7 @@ struct SubscriptionPlan: Identifiable, Codable, Hashable {
 
 enum SubscriptionFeature: String, Codable, CaseIterable {
     case offlineDownloadsUnlimited
-    case 3dMaps
+    case maps3D
     case hdTerrain
     case analytics
     case weatherForecasts48h

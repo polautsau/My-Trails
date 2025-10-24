@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 @MainActor
 final class ProfileViewModel: ObservableObject {
@@ -19,8 +20,8 @@ final class ProfileViewModel: ObservableObject {
         authService = services.authService
         Task { await loadProfile() }
         plans = [
-            SubscriptionPlan(id: UUID(), type: .monthly, price: 3.99, currencyCode: "USD", features: [.offlineDownloadsUnlimited, .3dMaps, .weatherForecasts7d, .adsFree, .analytics]),
-            SubscriptionPlan(id: UUID(), type: .yearly, price: 29.99, currencyCode: "USD", features: [.offlineDownloadsUnlimited, .3dMaps, .weatherForecasts7d, .adsFree, .analytics, .customMapStyles])
+            SubscriptionPlan(id: UUID(), type: .monthly, price: 3.99, currencyCode: "USD", features: [.offlineDownloadsUnlimited, .maps3D, .weatherForecasts7d, .adsFree, .analytics]),
+            SubscriptionPlan(id: UUID(), type: .yearly, price: 29.99, currencyCode: "USD", features: [.offlineDownloadsUnlimited, .maps3D, .weatherForecasts7d, .adsFree, .analytics, .customMapStyles])
         ]
     }
 
